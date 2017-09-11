@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  #DB保存前にemail属性を強制的にに小文字へ変換
+  before_save { self.email = email.downcase }
+  
   #nameの検証
   validates :name,  presence: true, length: { maximum: 50 }
   
