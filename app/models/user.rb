@@ -11,8 +11,10 @@ class User < ApplicationRecord
                    format: {with: VALID_EMAIL_REGEX },
                    uniqueness:  { case_sensitive: false }
   
-  ##セキュアなパスワード                 
+  #セキュアなパスワード                 
   has_secure_password
 
+  #passwordの検証
+  validates :password, presence: true, length: { minimum: 6 }
   
 end
