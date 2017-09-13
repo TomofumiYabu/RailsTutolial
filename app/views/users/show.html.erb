@@ -1,6 +1,5 @@
-<p> <%= @user.name %>, <%= @user.email %> </p>
-<p> <%= @user.created_at %>, <%= @user.updated_at %> </p>
-
-<h2>
-  現在時間は <%= Time.now %> です。
-</h2>
+<% provide(:title, @user.name) %>
+<h1>
+  <%= gravatar_for @user %>
+  <%= @user.name %>
+</h1>
