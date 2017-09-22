@@ -3,8 +3,13 @@ require 'test_helper'
 class UsersSignupTest < ActionDispatch::IntegrationTest
   test "invalid signup information" do
     get signup_path
+    
+    #POST先が正しいかのテスト
+    assert_select "form[action=?]", signup_path
+    
+    #不正なUserデータをPOSTしてテスト
     assert_no_difference 'User.count' do
-      post users_path, params: { user: { name:  "",
+      post signup_path, params: { user: { name:  "",
                                          email: "user@invalid",
                                          password:              "foo",
                                          password_confirmation: "bar" } }
