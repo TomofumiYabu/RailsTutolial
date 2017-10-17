@@ -70,6 +70,13 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     end
     assert_redirected_to root_url
   end
-
+  
+  #Tutolial10章にはないが検証のため追加
+  test "should destroy when logged in as an admin" do
+    log_in_as(@user)
+    assert_difference('User.count', -1) do
+      delete user_path(@other_user)
+    end
+  end
 
 end
