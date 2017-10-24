@@ -1,7 +1,7 @@
 class PasswordResetsController < ApplicationController
-  def mew
+  def new
   end
 
-  def edot
+  def edit
   end
 end
