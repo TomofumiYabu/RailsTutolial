@@ -24,10 +24,11 @@ class PasswordResetsController < ApplicationController
   
   def update
     if params[:user][:password].empty?    #再設定フォームでパスワードが空文字のケース
-      @user.error.add(:password, :blank)  #パスワードがblankというエラーメッセージをuserオブジェクトに入れる
+      @user.errors.add(:password, :blank)  #パスワードがblankというエラーメッセージをuserオブジェクトに入れる
       render 'edit'                       #再設定フォームを再度描画
     elsif @user.update_attributes(user_params)  #正常にパスワードが更新できたとき
       log_in @user                              #自動でログインする
+      @user.update_attribute(:reset_digest, nil)
       flash[:success] = "Password has been reset."
       redirect_to @user
     else                                  #無効なパスワードの場合
