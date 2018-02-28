@@ -26,6 +26,11 @@ class User < ApplicationRecord
     SecureRandom.urlsafe_base64
   end
   
+  #試作フィードの定義（複数のMicropostを返す）
+  def feed
+    Micropost.where("user_id = ?", id)
+  end
+  
   # 永続セッションのためにユーザーをデータベースに記憶する
   def remember
     self.remember_token = User.new_token
