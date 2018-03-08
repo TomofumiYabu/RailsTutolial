@@ -17,6 +17,9 @@
 !/log/.keep
 !/tmp/.keep
 
+# アップロードされたテスト画像を無視する
+/public/uploads
+
 # Ignore Byebug command history file.
 .byebug_history
 
