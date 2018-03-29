@@ -36,7 +36,7 @@ class User < ApplicationRecord
   
   #試作フィードの定義（複数のMicropostを返す）
   def feed
-    Micropost.where("user_id = ?", id)
+    Micropost.where("user_id IN (?) OR user_id = ?",following_ids, id)
   end
   
   # 永続セッションのためにユーザーをデータベースに記憶する
