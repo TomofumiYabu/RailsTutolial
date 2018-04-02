@@ -34,9 +34,10 @@ class User < ApplicationRecord
     SecureRandom.urlsafe_base64
   end
   
-  #試作フィードの定義（複数のMicropostを返す）
+  #ユーザーのステータスフィードを返す
   def feed
-    Micropost.where("user_id IN (?) OR user_id = ?",following_ids, id)
+    following_list = "SELECT followed_id FROM relationships WHERE follower_id = :user_id"
+    Micropost.where("user_id IN (#{following_list}) OR user_id = :user_id", user_id: id)
   end
   
   # 永続セッションのためにユーザーをデータベースに記憶する
